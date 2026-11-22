@@ -17,6 +17,7 @@ services:
         - pnpm-workspace.yaml
         - render.yaml
         - .nvmrc
+        - README.md
     envVars:
       - key: NODE_VERSION
         value: "24.17.0"
