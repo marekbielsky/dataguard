@@ -12,6 +12,19 @@ Projekt akademicki (monorepo). W bieżącym zakresie uruchomiony jest wyłączni
 
 Pozostałe elementy docelowego stosu (NestJS, PostgreSQL, Redis/BullMQ, Python/Polars, OpenAI, LDAP, pełny zestaw testów) są **planowane** i nie są jeszcze wdrożone.
 
+## Repozytorium
+
+- Adres: [https://github.com/marekbielsky/dataguard](https://github.com/marekbielsky/dataguard)
+- Widoczność: publiczne
+- Gałąź główna: `main`
+
+## Pobranie projektu
+
+```bash
+git clone https://github.com/marekbielsky/dataguard.git
+cd dataguard
+```
+
 ## Wymagania
 
 | Narzędzie | Wersja |
@@ -20,6 +33,8 @@ Pozostałe elementy docelowego stosu (NestJS, PostgreSQL, Redis/BullMQ, Python/P
 | pnpm | 12.21.0 (`packageManager` w `package.json`) |
 
 ## Instalacja
+
+Z katalogu głównego sklonowanego repozytorium:
 
 ```bash
 pnpm install --frozen-lockfile
