@@ -22,18 +22,18 @@
 
 | Kontrola | Wynik | Uwagi |
 | --- | --- | --- |
-| Szerokości 320 / 768 / 1440 px | do potwierdzenia na publicznym URL | układ fluid + `max-w-5xl`, `min-width: 320px`, `overflow-x: hidden` |
-| Brak poziomego przewijania przy 320 px | do potwierdzenia na publicznym URL | |
+| Szerokości 320 / 768 / 1440 px | kod OK; pełny viewport w przeglądarce — do ręcznego potwierdzenia | układ fluid + `max-w-5xl`, `min-width: 320px`, `overflow-x: hidden` |
+| Brak poziomego przewijania przy 320 px | kod OK (`overflow-x: hidden`); viewport — do ręcznego potwierdzenia | |
 | Nawigacja klawiaturą i widoczny fokus | częściowo zweryfikowane w kodzie | skip-link, `focus-visible` na odnośnikach |
-| Brak nieoczekiwanych żądań zewnętrznych | do potwierdzenia w DevTools na publicznym URL | brak zewnętrznych zasobów w kodzie |
+| Brak nieoczekiwanych żądań zewnętrznych | kod OK (brak zewnętrznych fontów/trackerów); DevTools — do ręcznego potwierdzenia | assety tylko z domeny hostingu `/_next` |
 
 ## Publikacja
 
 - **Hosting:** Render (darmowy Web Service, plan Free)
 - **Blueprint:** `render.yaml`
 - **Gałąź produkcyjna:** `main` (auto-deploy po push)
-- **Adres HTTPS:** (uzupełniane po wdrożeniu)
-- **Zgodność z commitem:** (uzupełniane po wdrożeniu)
+- **Adres HTTPS:** https://dataguard-web.onrender.com
+- **Zgodność z commitem:** a876756 (CHECK-3) — potwierdzone w Render deploy
 
 ## Ograniczenia
 
