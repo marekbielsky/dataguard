@@ -61,7 +61,16 @@ Uruchamiane z katalogu głównego repozytorium:
 
 ## Publikacja
 
-Adres publiczny HTTPS zostanie uzupełniony po skonfigurowaniu hostingu (etap CHECK-3).
+Hosting: **Render** (darmowy Web Service, bez płatnych dodatków).
+
+- Blueprint: `render.yaml` w katalogu głównym
+- Instalacja z lockfile monorepo (`pnpm install --frozen-lockfile`)
+- Build: `pnpm build` (workspace `apps/web`)
+- Start: `pnpm --filter @dataguard/web start`
+- Gałąź produkcyjna: `main` (automatyczne wdrożenie po push)
+- Adres publiczny HTTPS: [https://dataguard-web.onrender.com](https://dataguard-web.onrender.com)
+
+CI (GitHub Actions) sprawdza kod; Render publikuje stronę. Nie skonfigurowano równoległego drugiego hostingu.
 
 ## Licencja
 
