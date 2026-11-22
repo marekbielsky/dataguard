@@ -122,7 +122,7 @@ export default function Home() {
 
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-6 text-sm text-slate-600 sm:px-6 sm:flex-row sm:items-center sm:justify-between">
-          <p>DataGuard — statyczne demo przygotowawcze</p>
+          <p>DataGuard — statyczne demo przygotowawcze <span className="sr-only">ci-cd-build</span></p>
           <p>
             Kod źródłowy:{" "}
             <a

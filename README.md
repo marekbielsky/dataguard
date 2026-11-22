@@ -88,7 +88,7 @@ Hosting: **Render** (darmowy Web Service, bez płatnych dodatków).
 CI (GitHub Actions) sprawdza kod; Render publikuje stronę. Nie skonfigurowano równoległego drugiego hostingu.
 
 
-<!-- ci-cd-verify:2026-11-22T05:07Z -->
+<!-- ci-cd-verify:2026-11-22T05:18Z -->
 ## Licencja
 
 Projekt akademicki — szczegóły licencji do ustalenia przez zespół.
