@@ -1,0 +1,249 @@
+{
+  "url": "https://dataguard-web.onrender.com/",
+  "startedAt": "2026-11-22T04:50:52.905Z",
+  "finishedAt": "2026-11-22T04:50:57.303Z",
+  "httpStatus": 200,
+  "finalUrl": "https://dataguard-web.onrender.com/",
+  "content": {
+    "lang": "pl",
+    "title": "DataGuard — ocena jakości danych dla AI",
+    "hasDataGuard": true,
+    "hasDemoBadge": true,
+    "hasTopic": true,
+    "hasPlanned": true,
+    "hasNoProcess": true,
+    "h1Count": 1,
+    "h1Text": "DataGuard",
+    "forms": 0,
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true
+    },
+    "githubHref": "https://github.com/marekbielsky/dataguard"
+  },
+  "viewports": {
+    "320": {
+      "innerWidth": 320,
+      "clientWidth": 320,
+      "scrollWidth": 320,
+      "scrollHeight": 2047,
+      "hasHorizontalScroll": false
+    },
+    "768": {
+      "innerWidth": 768,
+      "clientWidth": 768,
+      "scrollWidth": 768,
+      "scrollHeight": 1293,
+      "hasHorizontalScroll": false
+    },
+    "1440": {
+      "innerWidth": 1440,
+      "clientWidth": 1440,
+      "scrollWidth": 1440,
+      "scrollHeight": 1265,
+      "hasHorizontalScroll": false
+    }
+  },
+  "keyboard": {
+    "focusSequence": [
+      {
+        "tag": "a",
+        "text": "Przejdź do treści",
+        "href": "#tresc",
+        "className": "sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-slate-900 focus:p",
+        "outline": "solid 2px rgb(15, 23, 42)",
+        "outlineOffset": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "a",
+        "text": "github.com/marekbielsky/dataguard",
+        "href": "https://github.com/marekbielsky/dataguard",
+        "className": "font-medium text-slate-900 underline decoration-slate-400 underline-offset-2 hover:decoration-slate-900 focus-visible:ou",
+        "outline": "solid 2px rgb(15, 23, 42)",
+        "outlineOffset": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "tag": null,
+        "text": null,
+        "href": null,
+        "className": null,
+        "outline": null
+      },
+      {
+        "tag": "a",
+        "text": "Przejdź do treści",
+        "href": "#tresc",
+        "className": "sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-slate-900 focus:p",
+        "outline": "solid 2px rgb(15, 23, 42)",
+        "outlineOffset": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "a",
+        "text": "github.com/marekbielsky/dataguard",
+        "href": "https://github.com/marekbielsky/dataguard",
+        "className": "font-medium text-slate-900 underline decoration-slate-400 underline-offset-2 hover:decoration-slate-900 focus-visible:ou",
+        "outline": "solid 2px rgb(15, 23, 42)",
+        "outlineOffset": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "a",
+        "text": "Przejdź do treści",
+        "href": "#tresc",
+        "className": "sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-slate-900 focus:p",
+        "outline": "solid 2px rgb(15, 23, 42)",
+        "outlineOffset": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "tag": "a",
+        "text": "github.com/marekbielsky/dataguard",
+        "href": "https://github.com/marekbielsky/dataguard",
+        "className": "font-medium text-slate-900 underline decoration-slate-400 underline-offset-2 hover:decoration-slate-900 focus-visible:ou",
+        "outline": "solid 2px rgb(15, 23, 42)",
+        "outlineOffset": "2px",
+        "boxShadow": "none"
+      },
+      {
+        "tag": null,
+        "text": null,
+        "href": null,
+        "className": null,
+        "outline": null
+      }
+    ],
+    "reachedSkipLink": true,
+    "reachedGithub": true,
+    "focusableCount": 6,
+    "visibleFocusEvidence": {
+      "tag": "a",
+      "text": "Przejdź do treści",
+      "href": "#tresc",
+      "className": "sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-slate-900 focus:p",
+      "outline": "solid 2px rgb(15, 23, 42)",
+      "outlineOffset": "2px",
+      "boxShadow": "none"
+    },
+    "visibleFocus": true,
+    "githubLinkFocusable": true,
+    "githubHref": "https://github.com/marekbielsky/dataguard"
+  },
+  "console": [],
+  "pageErrors": [],
+  "requestClasses": {
+    "app": 14
+  },
+  "requests": [
+    {
+      "url": "https://dataguard-web.onrender.com/",
+      "resourceType": "document",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/3kjqzja6hvxkd.css",
+      "resourceType": "stylesheet",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/0jhffx7lvz6c1.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/3ctxf1o0eb-he.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/20hu2zg97a0l1.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/turbopack-2u1d16houkiyo.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/2i5f557d4tsvu.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/",
+      "resourceType": "document",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/3kjqzja6hvxkd.css",
+      "resourceType": "stylesheet",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/0jhffx7lvz6c1.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/3ctxf1o0eb-he.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/20hu2zg97a0l1.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/turbopack-2u1d16houkiyo.js",
+      "resourceType": "script",
+      "class": "app"
+    },
+    {
+      "url": "https://dataguard-web.onrender.com/_next/static/chunks/2i5f557d4tsvu.js",
+      "resourceType": "script",
+      "class": "app"
+    }
+  ],
+  "externalRequests": [],
+  "summary": {
+    "pass": [
+      "no-horizontal-scroll@320",
+      "viewport-checked@320",
+      "no-horizontal-scroll@768",
+      "viewport-checked@768",
+      "no-horizontal-scroll@1440",
+      "viewport-checked@1440",
+      "no-console-or-page-errors",
+      "lang-pl",
+      "title",
+      "h1-one",
+      "name",
+      "demo-badge",
+      "topic",
+      "planned",
+      "no-process",
+      "no-forms",
+      "landmarks",
+      "github-link",
+      "http-200",
+      "no-third-party-requests",
+      "keyboard-github-focus",
+      "keyboard-skip-link",
+      "visible-focus"
+    ],
+    "fail": [],
+    "notes": []
+  },
+  "ok": true,
+  "tooling": {
+    "browser": "Google Chrome via Playwright channel=chrome",
+    "runner": "playwright-core@1.56.1 headless",
+    "os": "macOS arm64"
+  },
+  "githubLinkHttpStatus": 200
+}

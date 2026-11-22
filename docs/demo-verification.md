@@ -1,7 +1,7 @@
 # Weryfikacja demo statycznego (CHECK-3)
 
 Dokument opisuje **rzeczywisty** stan weryfikacji epika CHECK-1 (etap B).  
-Wyniki oznaczone jako „nie przeprowadzono” nie były wykonywane i nie są deklarowane jako zaliczone.
+Wyniki oznaczone jako „nie przeprowadzono” nie były wykonywane.
 
 ## Metadane
 
@@ -12,16 +12,28 @@ Wyniki oznaczone jako „nie przeprowadzono” nie były wykonywane i nie są de
 | Katalog lokalny | `/Users/marekbielski/WebstormProjects/dataguard` |
 | Repozytorium | https://github.com/marekbielsky/dataguard (publiczne) |
 | Gałąź produkcyjna | `main` |
-| Commit produkcyjny (HEAD `main`) | `11984f7b85c08f2076004077366aa8ee3d08c5c9` |
-| Treść demo (commit feature) | `a876756` — CHECK-3: statyczne demo DataGuard i publikacja na Render |
-| Merge do `main` | PR #2 — https://github.com/marekbielsky/dataguard/pull/2 |
+| Commit przy weryfikacji przeglądarkowej | HEAD `main` w momencie testu (treść demo z linii CHECK-3; publikacja Render) |
 | Adres publiczny HTTPS | https://dataguard-web.onrender.com |
-| Hosting | Render Free Web Service `dataguard-web` (`srv-dc172hmc6qcc73cp5esg`), region Frankfurt |
+| Hosting | Render Free Web Service `dataguard-web` (`srv-dc172hmc6qcc73cp5esg`), Frankfurt |
 | Blueprint | `render.yaml` |
 | Auto-deploy | gałąź `main`, trigger: commit |
-| CI po merge do `main` | SUCCESS — https://github.com/marekbielsky/dataguard/actions/runs/44986010695 |
+| CI po merge PR #2 | SUCCESS — https://github.com/marekbielsky/dataguard/actions/runs/44986010695 |
+| Artefakty przeglądarkowe | `docs/verification/` |
 
-## Zakres demo (co jest w zakresie)
+## Narzędzie weryfikacji przeglądarkowej
+
+| Pole | Wartość |
+| --- | --- |
+| Data/czas testu | 2026-11-22 (raport JSON) |
+| Silnik | Google Chrome (Playwright `channel: "chrome"`, headless) |
+| Biblioteka | `playwright-core@1.56.1` |
+| URL testowany | https://dataguard-web.onrender.com/ |
+| Raport maszynowy | [docs/verification/browser-report.json](verification/browser-report.json) |
+| Zrzuty | [docs/verification/screenshots/](verification/screenshots/) |
+
+Skrypt nie jest częścią CI aplikacji; uruchomiono go jednorazowo na potrzeby epika.
+
+## Zakres demo
 
 - Statyczna strona informacyjna Next.js (App Router) w `apps/web`
 - Bez logiki biznesowej, formularzy, API, bazy i logowania
@@ -32,137 +44,142 @@ Wyniki oznaczone jako „nie przeprowadzono” nie były wykonywane i nie są de
 
 | Kontrola | Wynik | Jak sprawdzono |
 | --- | --- | --- |
-| `pnpm install --frozen-lockfile` | OK | uruchomienie z katalogu głównego monorepo |
-| `pnpm lint` | OK | ESLint w `@dataguard/web` |
+| `pnpm install --frozen-lockfile` | OK | katalog główny monorepo |
+| `pnpm lint` | OK | ESLint `@dataguard/web` |
 | `pnpm typecheck` | OK | `tsc --noEmit` |
-| `pnpm build` | OK | `next build` — trasa `/` jako static |
-| Skrypty root (`dev` / `lint` / `typecheck` / `build`) | OK | delegacja przez `pnpm --filter @dataguard/web` |
-| TypeScript strict | OK | `strict: true` w `apps/web/tsconfig.json` |
-| Brak backendu / pustych usług spoza zakresu | OK | przegląd struktury repozytorium |
+| `pnpm build` | OK | `next build`, trasa `/` static |
+| Skrypty root | OK | `dev` / `lint` / `typecheck` / `build` |
+| TypeScript strict | OK | `apps/web/tsconfig.json` |
+| Brak usług spoza zakresu | OK | struktura repo |
 
-## Treść i semantykę HTML (przeprowadzone)
+## Treść i semantyka (przeprowadzone)
 
-Sprawdzenie: przegląd kodu źródłowego + pobranie HTML z produkcji (`curl` HTTPS, HTTP 200).
+Źródła: kod + HTML produkcji + DOM w Chrome.
 
 | Kontrola | Wynik |
 | --- | --- |
-| Nazwa **DataGuard** | OK |
-| Pełny temat projektu (jakość danych / AI / analityka) | OK |
-| Krótki opis celu | OK |
-| Oznaczenie „Statyczne demo — etap przygotowawczy” | OK |
-| Sekcja planowanych możliwości (katalog, ocena jakości, klasyfikacja AI, zgodność, zatwierdzanie) | OK |
-| Informacja, że demo nie przetwarza danych użytkownika | OK |
-| Brak przycisków udających upload / analizę / logowanie | OK |
-| Brak formularzy | OK |
-| Brak fikcyjnych wyników | OK |
-| Jedyny odnośnik zewnętrzny merytoryczny: repozytorium GitHub | OK |
+| HTTP 200 na HTTPS | OK |
 | `lang="pl"` | OK |
-| Tytuł strony (`<title>DataGuard — ocena jakości danych dla AI</title>`) | OK |
-| Meta description | OK (w kodzie `layout.tsx`; obecne w buildzie Next) |
+| Tytuł zawiera DataGuard | OK |
+| Dokładnie jeden `h1` („DataGuard”) | OK |
+| Nazwa DataGuard | OK |
+| Temat / AI-analityka | OK |
+| Badge „Statyczne demo — etap przygotowawczy” | OK |
+| Sekcja „Planowane możliwości” | OK |
+| Informacja o braku przetwarzania danych | OK |
+| Brak formularzy | OK |
+| Landmarky `header` / `main` / `footer` | OK |
+| Link do https://github.com/marekbielsky/dataguard | OK (DOM + HTTP 200 na docelowy URL) |
 | Favicon | OK |
-| Landmarky: `header`, `main`, `footer`; jeden `h1` | OK |
-| Hierarchia nagłówków h1 → h2 → h3 | OK |
-| Skip-link „Przejdź do treści” | OK (w kodzie) |
 
-### Absolute URL w HTML produkcji (2026-11-22)
+## Publikacja (przeprowadzone)
 
-W wyrenderowanym HTML występują wyłącznie odnośniki do:
+| Kontrola | Wynik |
+| --- | --- |
+| Publiczny HTTPS | OK — https://dataguard-web.onrender.com |
+| Deploy / auto-deploy z `main` | OK |
+| CI na `main` | OK |
+| Tylko Render jako hosting aplikacji | OK |
 
-- `https://github.com/marekbielsky/dataguard`
+## Kontrole przeglądarkowe (przeprowadzone 2026-11-22)
 
-Assety aplikacji są ścieżkami względnymi (`/_next/static/...`, favicon).  
-**Nie** stwierdzono w HTML odwołań do Google Fonts, analytics ani innych trackerów.
+### Viewporty i poziome przewijanie
 
-Uwaga: odpowiedź HTTP produkcji przechodzi przez infrastrukturę Render/Cloudflare (`server: cloudflare`, `x-render-origin-server: Render`). To warstwa hostingu, nie kod aplikacji.
+| Szerokość | `clientWidth` | `scrollWidth` | Poziomy scroll | Zrzut |
+| --- | --- | --- | --- | --- |
+| 320 px | 320 | 320 | **brak** | [viewport-320.png](verification/screenshots/viewport-320.png) |
+| 768 px | 768 | 768 | **brak** | [viewport-768.png](verification/screenshots/viewport-768.png) |
+| 1440 px | 1440 | 1440 | **brak** | [viewport-1440.png](verification/screenshots/viewport-1440.png) |
 
-## Publikacja i zgodność z `main` (przeprowadzone)
+Wysokość okna testowego: 900 px. Pomiar: `documentElement` / `body` `scrollWidth` vs `clientWidth` (tolerancja 1 px).
+
+### Klawiatura i fokus
 
 | Kontrola | Wynik | Szczegóły |
 | --- | --- | --- |
-| Publiczny HTTPS | OK | https://dataguard-web.onrender.com → HTTP/2 200 |
-| Certyfikat TLS | OK | weryfikacja klienta curl (`ssl_verify_result=0`) |
-| Deploy z gałęzi `main` | OK | usługa ustawiona na `main` po merge PR #2 |
-| Auto-deploy po commitach do `main` | OK | `autoDeploy=yes`, trigger `commit` |
-| Zgodność wdrożenia z commitem | OK | deploy live z `11984f7` (merge PR #2) |
-| CI na `main` po merge | OK | run `44986010695`, conclusion `success` |
-| Brak równoległego drugiego hostingu aplikacji | OK | tylko Render; GitHub Actions = kontrole, nie publish |
+| Tab osiąga skip-link „Przejdź do treści” | OK | `href="#tresc"` |
+| Tab osiąga link GitHub w stopce | OK | `https://github.com/marekbielsky/dataguard` |
+| Widoczny fokus | OK | computed style m.in. `outline: solid 2px rgb(15, 23, 42)` na fokusowanym odnośniku |
+| Elementy interaktywne obsługiwane klawiaturą | OK | jedyne interaktywne odnośniki: skip-link + GitHub |
 
-## Kontrole przeglądarkowe (status)
+### Konsola i błędy strony
 
-Poniższe punkty brief CHECK-3 wymagają **prawdziwej przeglądarki** (DevTools: viewport, Network, Console, klawiatura).  
-W tym epiku **nie uruchomiono** sesji przeglądarki ani Playwright do tych pomiarów.
+| Kontrola | Wynik |
+| --- | --- |
+| `pageerror` | brak |
+| `console` typu `error` | brak |
 
-| Kontrola | Wynik | Uzasadnienie / mitigacja w kodzie |
+### Sieć (requesty podczas ładowania strony)
+
+| Klasa | Liczba | Komentarz |
 | --- | --- | --- |
-| Layout przy szerokości **320 px** | **nie przeprowadzono** w przeglądarce | CSS: `min-width: 320px`, `overflow-x: hidden`, fluid `px-4` / grid |
-| Layout przy szerokości **768 px** | **nie przeprowadzono** w przeglądarce | breakpointi `sm:` w Tailwind |
-| Layout przy szerokości **1440 px** | **nie przeprowadzono** w przeglądarce | kontener `max-w-5xl` |
-| Brak poziomego przewijania przy 320 px | **nie przeprowadzono** w przeglądarce | `html { overflow-x: hidden }` |
-| Nawigacja klawiaturą (Tab) po odnośnikach | **nie przeprowadzono** w przeglądarce | jeden link w stopce + skip-link |
-| Widoczny fokus elementów interaktywnych | **nie przeprowadzono** w przeglądarce | `a:focus-visible` / klasy focus w kodzie |
-| Brak błędów aplikacji w konsoli przeglądarki | **nie przeprowadzono** | — |
-| Network: brak nieoczekiwanych requestów third-party z aplikacji | **nie przeprowadzono** w DevTools | HTML produkcji bez trackerów/fontów zewnętrznych (patrz wyżej) |
+| `app` (dataguard-web.onrender.com) | 14 | dokument, skrypty/style `/_next`, favicon |
+| `third-party` (analityka, fonty zewnętrzne, trackery) | **0** | OK |
 
-## CI (przeprowadzone)
+Nie stwierdzono żądań do Google Fonts, analytics ani innych trackerów aplikacji.  
+Infrastruktura CDN hostingu (nagłówki Cloudflare po stronie odpowiedzi HTTP) nie generowała osobnych third-party requestów aplikacji w zebranym logu Playwright.
+
+Pełna lista requestów: [browser-report.json](verification/browser-report.json).
+
+## CI
 
 | Zdarzenie | Wynik | URL |
 | --- | --- | --- |
-| PR #1 (CHECK-2) | SUCCESS | https://github.com/marekbielsky/dataguard/pull/1 |
-| PR #2 (CHECK-3) | SUCCESS | https://github.com/marekbielsky/dataguard/pull/2 |
+| PR #1 CHECK-2 | SUCCESS | https://github.com/marekbielsky/dataguard/pull/1 |
+| PR #2 CHECK-3 | SUCCESS | https://github.com/marekbielsky/dataguard/pull/2 |
 | Push `main` po PR #1 | SUCCESS | https://github.com/marekbielsky/dataguard/actions/runs/44984911905 |
 | Push `main` po PR #2 | SUCCESS | https://github.com/marekbielsky/dataguard/actions/runs/44986010695 |
-
-Workflow `.github/workflows/ci.yml`: `pnpm install --frozen-lockfile` → lint → typecheck → build.  
-Wersje: Node z `.nvmrc` (24), pnpm 12.21.0. Minimalne uprawnienia `contents: read`.
 
 ## Odstępstwa od briefu (świadome)
 
 | Temat | Decyzja |
 | --- | --- |
-| Katalog roboczy | `~/WebstormProjects/dataguard` zamiast `~/projects/dataguard` (polecenie użytkownika) |
-| Hosting | Render Free zamiast preferowanego Vercel (praktyka użytkownika; bez płatnych usług) |
-| shadcn/ui | nie dodano — brak komponentów wymagających biblioteki na statycznym demo |
-| E2E / Playwright | nie instalowano pełnego zestawu testowego do jednej strony |
+| Katalog | `~/WebstormProjects/dataguard` (polecenie użytkownika) |
+| Hosting | Render Free zamiast Vercel (praktyka użytkownika) |
+| shadcn/ui | nie dodano — brak potrzeby na tym demo |
+| E2E w CI | brak stałego joba Playwright w GitHub Actions; weryfikacja przeglądarkowa wykonana lokalnie i zarchiwizowana w `docs/verification/` |
 
-## Blokady poza weryfikacją UI
+## Blokady poza UI
 
 Zob. `docs/blockers.md`:
 
-- Loginy GitHub zespołu i prowadzącego **nie przekazane**
-- Zaproszenia collaborators **nie wysłane**
-- Jedyny collaborator: właściciel `marekbielsky`
+- Loginy GitHub zespołu / prowadzącego nieprzekazane
+- Zaproszenia collaborators niewysłane
+- Collaborator: tylko `marekbielsky`
 
 ## Ograniczenia hostingu
 
-- Plan Free na Render: możliwy **idle** po ~15 min bez ruchu i zimny start (~1 min)
-- Free instance hours / bandwidth limity workspace Render
-- PR previews na usłudze: wyłączone w konfiguracji CLI
+- Render Free: możliwy idle po ~15 min i zimny start
+- Limity bandwidth / pipeline minutes workspace
 
 ## Podsumowanie weryfikacji CHECK-3
 
 | Obszar | Status |
 | --- | --- |
-| Jakość kodu lokalnie i w CI | zaliczone |
-| Treść i zakres statycznego demo | zaliczone |
-| Publikacja HTTPS + deploy z `main` | zaliczone |
-| Smoke test HTML produkcji (`curl`) | zaliczone |
-| Interaktywna weryfikacja w przeglądarce (viewport / klawiatura / Console / Network UI) | **niezaliczone — nie przeprowadzono** |
-| Dostępy zespołu do repo | **blokada** (poza UI; osobne kryterium epika) |
+| Jakość kodu lokalnie i w CI | **zaliczone** |
+| Treść i zakres statycznego demo | **zaliczone** |
+| Publikacja HTTPS + deploy z `main` | **zaliczone** |
+| Smoke HTML / DOM | **zaliczone** |
+| Viewporty 320 / 768 / 1440 + brak horizontal scroll | **zaliczone** |
+| Klawiatura + widoczny fokus | **zaliczone** |
+| Konsola bez błędów aplikacji | **zaliczone** |
+| Brak third-party requestów aplikacji | **zaliczone** |
+| Dostępy zespołu do repo | **blokada** (osobne kryterium) |
 
-## Reprodukcja kontroli (dla ponowienia)
+## Reprodukcja
 
 ```bash
 cd /Users/marekbielski/WebstormProjects/dataguard
 pnpm install --frozen-lockfile
-pnpm lint
-pnpm typecheck
-pnpm build
+pnpm lint && pnpm typecheck && pnpm build
 curl -sS -D- -o /tmp/dataguard.html https://dataguard-web.onrender.com/
 ```
 
-Ręcznie w przeglądarce (do domknięcia):
+Weryfikacja przeglądarkowa (przykład użytego podejścia):
 
-1. Otwórz https://dataguard-web.onrender.com  
-2. DevTools → wymiary 320, 768, 1440 → sprawdź brak horizontal scroll  
-3. Tab przez fokusowalne elementy  
-4. Console i Network (wykluczyć szum infrastruktury hostingu)
+```bash
+# wymaga lokalnego Google Chrome + playwright-core
+node /path/to/verify.mjs  # wynik jak docs/verification/browser-report.json
+```
+
+Ręcznie: otwórz https://dataguard-web.onrender.com → DevTools device mode 320/768/1440 → Tab → Console/Network.
