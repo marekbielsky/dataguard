@@ -1,0 +1,40 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# next.js
+apps/web/.next
+apps/web/out
+
+# build / cache
+dist
+build
+.turbo
+*.tsbuildinfo
+
+# env and secrets
+.env
+.env.*
+!.env.example
+
+# logs and debug
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# editors / OS
+.DS_Store
+.idea
+.vscode
+*.swp
+*.swo
+
+# testing / coverage
+coverage
+playwright-report
+test-results
+
+# vercel
+.vercel
