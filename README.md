@@ -85,7 +85,9 @@ Hosting: **Render** (darmowy Web Service, bez płatnych dodatków).
 - Gałąź produkcyjna: `main` (automatyczne wdrożenie po push)
 - Adres publiczny HTTPS: [https://dataguard-web.onrender.com](https://dataguard-web.onrender.com)
 
-CI (GitHub Actions) sprawdza kod; Render publikuje stronę. Nie skonfigurowano równoległego drugiego hostingu.
+CI (GitHub Actions) sprawdza kod (lint, typecheck, build). Po udanym CI na `main` workflow **Deploy Render** wywołuje wdrożenie usługi Render przez API (mostek CD — natywny webhook GitHub App nie był dostępny dla tego repo).
+
+Adres dashboardu: https://dashboard.render.com/web/srv-dc172hmc6qcc73cp5esg
 
 
 <!-- ci-cd-verify:2026-11-22T05:18Z -->

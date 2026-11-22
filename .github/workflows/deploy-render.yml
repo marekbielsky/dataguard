@@ -1,0 +1,51 @@
+name: Deploy Render
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-render-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Trigger Render deploy
+    runs-on: ubuntu-latest
+    # On push: wait for nothing if only docs; prefer after CI success via workflow_run
+    if: >
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
+    steps:
+      - name: Trigger deploy for commit
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          SERVICE_ID: srv-dc172hmc6qcc73cp5esg
+          COMMIT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if [ -z "${RENDER_API_KEY:-}" ]; then
+            echo "Missing RENDER_API_KEY secret" >&2
+            exit 1
+          fi
+          echo "Deploying commit ${COMMIT_SHA}"
+          code=$(curl -sS -o /tmp/render-deploy.json -w "%{http_code}" \
+            -X POST "https://api.render.com/v1/services/${SERVICE_ID}/deploys" \
+            -H "Authorization: Bearer ${RENDER_API_KEY}" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
+            -d "{}")
+          echo "HTTP ${code}"
+          cat /tmp/render-deploy.json
+          case "$code" in
+            200|201|202) exit 0 ;;
+            *) exit 1 ;;
+          esac

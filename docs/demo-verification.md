@@ -208,3 +208,19 @@ Push do `main` uruchamia workflow `.github/workflows/ci.yml` (lint, typecheck, b
 
 Live: https://dataguard-web.onrender.com (HTTP 200, commit demo `11984f7`).
 
+
+## Naprawa CD (2026-11-22, po merge PR #4)
+
+### Problem
+Usługa Render utworzona z publicznym URL repo nie otrzymywała webhooków GitHub (`hooks` = 0). Push na `main` uruchamiał tylko CI, nie deploy.
+
+### Rozwiązanie
+1. Wdrożono bieżący `main` przez Render API (`POST /services/.../deploys`).
+2. Dodano workflow `.github/workflows/deploy-render.yml`: po **udanym CI** na `main` (`workflow_run`) wywołuje deploy Render API.
+3. Secret GitHub `RENDER_API_KEY` ustawiony w repozytorium.
+
+### Weryfikacja
+- CI na push: nadal `.github/workflows/ci.yml`
+- CD: job Deploy Render po SUCCESS CI
+- Opcjonalnie docelowo: zainstalować [Render GitHub App](https://github.com/apps/render/installations/new) na repo i wrócić do natywnego auto-deploy.
+
