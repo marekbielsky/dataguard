@@ -183,3 +183,28 @@ node /path/to/verify.mjs  # wynik jak docs/verification/browser-report.json
 ```
 
 Ręcznie: otwórz https://dataguard-web.onrender.com → DevTools device mode 320/768/1440 → Tab → Console/Network.
+
+
+## Weryfikacja CI/CD po push do main (2026-11-22)
+
+### GitHub Actions (CI) — potwierdzone
+
+| Commit | Wynik | URL |
+| --- | --- | --- |
+| `2973e36` CHECK-8: weryfikacja CI/CD po zmianie na main | SUCCESS | https://github.com/marekbielsky/dataguard/actions/runs/44988046414 |
+| `020b8e2` CHECK-8: ponowna weryfikacja auto-deploy z main | SUCCESS | https://github.com/marekbielsky/dataguard/actions/runs/44988860069 |
+
+Push do `main` uruchamia workflow `.github/workflows/ci.yml` (lint, typecheck, build).
+
+### Render auto-deploy (CD) — niepotwierdzone w tej próbie
+
+| Oczekiwanie | Wynik |
+| --- | --- |
+| Push `2973e36` / `020b8e2` na `main` tworzy nowy deploy | **nie** — live pozostał na `11984f7` (trigger `api`) |
+| `autoDeploy` na usłudze | `yes`, trigger `commit`, branch `main` |
+| Webhooki GitHub w repozytorium | **brak** (`GET /repos/marekbielsky/dataguard/hooks` → pusta lista) |
+
+**Wniosek:** CI działa automatycznie. Automatyczne CD na Render **nie działa**, dopóki integracja GitHub (Render GitHub App / webhook) nie jest podpięta do repozytorium. Samo `autoDeploy=yes` nie wystarcza bez eventów push.
+
+Live: https://dataguard-web.onrender.com (HTTP 200, commit demo `11984f7`).
+
